@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
@@ -16,7 +15,9 @@ class AddNewContact(unittest.TestCase):
 
     def test_add_new_contact(self):
         wd = self.wd
+        # навигация на страничку
         wd.get("http://localhost/addressbook/")
+        # авторизация пользователя
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
@@ -25,7 +26,9 @@ class AddNewContact(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//input[@value='Login']").click()
+        # переход на сраницу формы добавления нового контакта
         wd.find_element_by_link_text("add new").click()
+        # заполнение формы
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Veaceslav")
@@ -100,8 +103,11 @@ class AddNewContact(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys("happy")
+        # сабмит формы
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+        # переход на главную страничку со списком контактов
         wd.find_element_by_link_text("home page").click()
+        # лог-аут
         wd.find_element_by_link_text("Logout").click()
 
     def is_element_present(self, how, what):
