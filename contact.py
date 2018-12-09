@@ -1,5 +1,7 @@
+
+
 class Contact:
-    def _init_ (self, notes, first_name, middle_name, last_name, nickname, title, company_name, address_1,
+    def __init__ (self, notes, first_name, middle_name, last_name, nickname, title, company_name, address_1,
                       home_phone, cell_phone, work_phone, fax, email_1, email_2, email_3, home_page, birth_day,
                       birth_month, birth_year, anniversay_day, anniversay_month, anniversay_year, part_of_group,
                       address_2, suit_nr):
