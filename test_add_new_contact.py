@@ -15,19 +15,27 @@ class AddNewContact(unittest.TestCase):
 
     def test_add_new_contact(self):
         wd = self.wd
-        # навигация на страничку
-        wd.get("http://localhost/addressbook/")
-        # авторизация пользователя
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_id("LoginForm").click()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_xpath("//input[@value='Login']").click()
-        # переход на сраницу формы добавления нового контакта
-        wd.find_element_by_link_text("add new").click()
+        self.go_to_page(wd)
+        self.login(wd)
+        self.init_new_contact(wd)
+        self.fill_the_form(wd)
+        self.submit_new_contact(wd)
+        self.return_to_main_page(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        # лог-аут
+        wd.find_element_by_link_text("Logout").click()
+
+    def return_to_main_page(self, wd):
+        # переход на главную страничку со списком контактов
+        wd.find_element_by_link_text("home page").click()
+
+    def submit_new_contact(self, wd):
+        # сабмит формы
+        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+
+    def fill_the_form(self, wd):
         # заполнение формы
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -103,12 +111,25 @@ class AddNewContact(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys("happy")
-        # сабмит формы
-        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        # переход на главную страничку со списком контактов
-        wd.find_element_by_link_text("home page").click()
-        # лог-аут
-        wd.find_element_by_link_text("Logout").click()
+
+    def init_new_contact(self, wd):
+        # переход на сраницу формы добавления нового контакта
+        wd.find_element_by_link_text("add new").click()
+
+    def login(self, wd):
+        # авторизация пользователя
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_id("LoginForm").click()
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_xpath("//input[@value='Login']").click()
+
+    def go_to_page(self, wd):
+        # навигация на страничку
+        wd.get("http://localhost/addressbook/")
 
     def is_element_present(self, how, what):
         try:
