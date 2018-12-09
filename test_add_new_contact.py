@@ -30,6 +30,24 @@ class AddNewContact(unittest.TestCase):
         self.return_to_main_page(wd)
         self.logout(wd)
 
+
+    def test_add_new_contact_2(self):
+        wd = self.wd
+        self.go_to_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.init_new_contact(wd)
+        self.fill_the_form(wd, notes="sad", first_name="Alexey", middle_name="Ivan", last_name="Shishkin",
+                           nickname="Shishka", title="", company_name="", address_1="",
+                           home_phone="", cell_phone="", work_phone="+646 979755454",
+                           fax="+100 5222 6633", email_1="", email_2="asdasd@sdfs.com",
+                           email_3="gdfgd@sdfsd.com", home_page="", birth_day="3", birth_month="March",
+                           birth_year="1987", anniversay_day="6", anniversay_month="April",
+                           anniversay_year="2007", part_of_group="new_group", address_2="",
+                           suit_nr="ap 95")
+        self.submit_new_contact(wd)
+        self.return_to_main_page(wd)
+        self.logout(wd)
+
     def logout(self, wd):
         # лог-аут
         wd.find_element_by_link_text("Logout").click()
